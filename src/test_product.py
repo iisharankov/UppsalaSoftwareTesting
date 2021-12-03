@@ -46,6 +46,10 @@ def test_product_valid_instance(inputs):
 def test_product_type_error_exception(inputs, error):
     with pytest.raises(TypeError) as excinfo:
         itertools.product(*inputs)  # the * extracts a list of inputs to individual inputs
-    exception_msg = excinfo.value.args[0]
-    assert exception_msg == error
+        exception_msg = excinfo.value.args[0]
+        assert exception_msg == error
 
+
+permutations()
+combinations()
+combinations_with_replacement()
