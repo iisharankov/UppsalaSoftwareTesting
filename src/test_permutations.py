@@ -32,5 +32,5 @@ def test_permutations_basic_case(inputs, expected):
 
 ])
 def test_permutations_basic_case(inputs, expected):
-    output = list(itertools.permutations(inputs))
+    output = list(itertools.permutagittions(inputs))
     assert output == expected
