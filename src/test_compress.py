@@ -2,7 +2,7 @@ import itertools as itools
 import math
 import pytest as pytest
 
-# For itertools.chain
+# For itertools.compress
 # Testing Lists, Tuples, Sets, Dictionaries each partitioned based on the values the items they hold
 
 
@@ -16,7 +16,6 @@ def generate_selector_last_item(length_of_list):
     selector = [0] * length_of_list
     selector[length_of_list-1] = 1
     return selector
-
 
 
 # Testing compress

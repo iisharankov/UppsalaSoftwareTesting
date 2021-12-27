@@ -2,9 +2,8 @@ import itertools as itools
 import math
 import pytest as pytest
 
-# For itertools.chain
+# For itertools.zip_longest
 # Testing Lists, Tuples, Sets, Dictionaries each partitioned based on the values the items they hold
-
 
 
 # Testing zip_longest

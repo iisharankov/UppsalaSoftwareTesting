@@ -2,7 +2,7 @@ import itertools as itools
 import math
 import pytest as pytest
 
-# For itertools.chain
+# For itertools.chain and chain.from_iterable
 # Testing Lists, Tuples, Sets, Dictionaries each partitioned based on the values the items they hold
 
 
