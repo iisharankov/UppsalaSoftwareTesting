@@ -11,8 +11,7 @@ import pytest
     (lambda x : x != 10, [34,-68,97.215,"10"], [34,-68,97.215,"10"])
 ])
 def test_takewhile_operators(predicate, inputs, expected):
-    result = list(itertools.takewhile(predicate, inputs))
-    assert result == expected
+    assert list(itertools.takewhile(predicate, inputs)) == expected
     
 # proceeding with "<" as default predicate operator
 
@@ -24,8 +23,7 @@ def test_takewhile_operators(predicate, inputs, expected):
     (lambda x : x < 0, [1,2,3,4,5,-1,-2,-3,-4,-5], [])
 ])
 def test_takewhile_int(predicate, inputs, expected):
-    result = list(itertools.takewhile(predicate, inputs))
-    assert result == expected
+    assert list(itertools.takewhile(predicate, inputs)) == expected
 
 @pytest.mark.parametrize("predicate, inputs, expected", [
     (lambda x : x < 0.25, [0.1,1.25,2.666,3.75], [0.1]),
@@ -36,8 +34,7 @@ def test_takewhile_int(predicate, inputs, expected):
     (lambda x : x < 0.5, [1.23,2.34,3.45,-1.23,-2.34,-3.45], [])
 ])
 def test_takewhile_float(predicate, inputs, expected):
-    result = list(itertools.takewhile(predicate, inputs))
-    assert result == expected
+    assert list(itertools.takewhile(predicate, inputs)) == expected
 
 @pytest.mark.parametrize("predicate, inputs, expected", [
     (lambda x : x < "c", ["a","b","c","d","c","b","a"], ["a","b"]),
@@ -47,8 +44,7 @@ def test_takewhile_float(predicate, inputs, expected):
     (lambda x : x < "sentence", ["here","is","one","sentence"], ["here","is","one"])
 ])
 def test_takewhile_char(predicate, inputs, expected):
-    result = list(itertools.takewhile(predicate, inputs))
-    assert result == expected
+    assert list(itertools.takewhile(predicate, inputs)) == expected
 
 @pytest.mark.parametrize("predicate, inputs, expected", [
     (lambda x : x < [1], [[0,1], [2,3], [-4,-5], [6,7]], [[0,1]]),
@@ -58,5 +54,30 @@ def test_takewhile_char(predicate, inputs, expected):
     (lambda x : x < [[1]], [[[0,1], [2,3]], [[4,5], [6,7]]], [[[0,1], [2,3]]])
 ])
 def test_takewhile_list(predicate, inputs, expected):
-    result = list(itertools.takewhile(predicate, inputs))
-    assert result == expected
+    assert list(itertools.takewhile(predicate, inputs)) == expected
+
+@pytest.mark.parametrize("predicate, inputs, error", [
+    (lambda x : x < 1, [[0,1]], "'<' not supported between instances of 'list' and 'int'"),
+    (lambda x : x < "a", [0,1], "'<' not supported between instances of 'int' and 'str'"),
+    (lambda x : x % 1, ["a","b"], "not all arguments converted during string formatting")
+])
+def test_takewhile_type_error(predicate, inputs, error):
+    with pytest.raises(TypeError) as excinfo:
+        list(itertools.takewhile(predicate, inputs))
+    assert excinfo.value.args[0] == error
+
+@pytest.mark.parametrize("predicate, error", [
+    (lambda x : x < 1, "takewhile expected 2 arguments, got 1")
+])
+def test_takewhile_type_error_1_arg(predicate, error):
+    with pytest.raises(TypeError) as excinfo:
+        list(itertools.takewhile(predicate))
+    assert excinfo.value.args[0] == error
+
+@pytest.mark.parametrize("predicate, inputs, redundant, error", [
+    (lambda x : x < 1, [0,1], 1, "takewhile expected 2 arguments, got 3")
+])
+def test_takewhile_type_error_3_arg(predicate, inputs, redundant, error):
+    with pytest.raises(TypeError) as excinfo:
+        list(itertools.takewhile(predicate, inputs, redundant))
+    assert excinfo.value.args[0] == error
