@@ -18,6 +18,6 @@ import pytest as pytest
     # (5) Outer loop condition never returns true
     (("", ""), [])
 ])
-def test_chain_two_sets_of_vars(chainables, expected_when_chained):
+def test_chain_white_box(chainables, expected_when_chained):
     output_chain = list(itools.chain(*chainables))
     assert output_chain == expected_when_chained
