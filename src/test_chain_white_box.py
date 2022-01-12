@@ -1,5 +1,4 @@
 import itertools as itools
-import math
 import pytest as pytest
 
 # For itertools.chain White Box Testing
