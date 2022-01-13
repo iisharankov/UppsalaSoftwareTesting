@@ -151,3 +151,4 @@ def test_permutations_memory_error_exception(inputs):
     with pytest.raises(MemoryError) as _:
         itertools.permutations(inputs, r=int(1e18))
 
+
