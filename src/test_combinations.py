@@ -40,6 +40,29 @@ def test_combinations_on_range(range_length, repetition, expected):
     output = list(itertools.combinations(range(range_length), r=repetition))
     assert output == expected
 
+@pytest.mark.parametrize("inputs, repetition, expected", [
+    ([68], 1, [(68,)]),
+    ([53], 2, []),
+    ([23], 3, []),
+    ([25], 4, []),
+    ([11, 42], 1, [(11,), (42,)]),
+    ([7, 41], 2, [(7, 41)]),
+    ([48, 5], 3, []),
+    ([44, 45], 4, []),
+    ([24, 7, 24], 1, [(24,), (7,), (24,)]),
+    ([36, 37, 25], 2, [(36, 37), (36, 25), (37, 25)]),
+    ([55, 40, 54], 3, [(55, 40, 54)]),
+    ([62, 48, 15], 4, []),
+    ([50, 18, 31, 63], 1, [(50,), (18,), (31,), (63,)]),
+    ([2, 30, 62, 42], 2, [(2, 30), (2, 62), (2, 42), (30, 62), (30, 42), (62, 42)]),
+    ([66, 62, 72, 39], 3, [(66, 62, 72), (66, 62, 39), (66, 72, 39), (62, 72, 39)]),
+    ([57, 29, 23, 50], 4, [(57, 29, 23, 50)]),
+
+])
+def test_combinations_on_range(inputs, repetition, expected):
+    output = list(itertools.combinations(inputs, r=repetition))
+    assert output == expected
+
 
 # Check that random examples are all valid instances
 @pytest.mark.parametrize("inputs", [
