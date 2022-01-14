@@ -36,6 +36,16 @@ def test_repeat_default():
 def test_repeat_normal(input, input2, exception_message):
     assert list(repeat(input, input2)) == exception_message
 
+# check normal usage2
+def test_repeat_normal2():
+    test = repeat("Hello  World!", 2)
+    assert next(test) == "Hello  World!"
+    assert next(test) == "Hello  World!"
+    try:
+        assert next(test) ==  "StopIteration"
+    except StopIteration:
+        print("StopIteration")
+
 
 # check error
 @pytest.mark.parametrize("input, input2, exception_message", [
