@@ -4,6 +4,7 @@ import pytest as pytest
 
 # For itertools.compress
 # Testing Lists, Tuples, Sets, Dictionaries each partitioned based on the values the items they hold
+# By Onur Yuksel
 
 
 def generate_selector_first_item(length_of_list):
